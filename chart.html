@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yearly Data Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        canvas {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .description {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Projek Data Chart</h1>
+        <p class="description"> Muhammad Akmal Khatami</p>
+        <canvas id="dataChart"></canvas>
+    </div>
+
+    <script>
+        // Data for the chart
+        const data = {
+            labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+            datasets: [
+                {
+                    label: '2022',
+                    data: [4017, 6135, 7092, 5841, 5036, 4547, 3467, 3970, 6313, 3595, 9207, 5945],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',  // Soft blue
+                    borderColor: 'rgba(54, 162, 235, 1)',  // Blue border
+                    borderWidth: 2
+                },
+                {
+                    label: '2023',
+                    data: [2416, 4136, 7935, 8004, 9505, 5206, 6108, 6343, 9404, 9280, 9287, 8689],
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',  // Soft red
+                    borderColor: 'rgba(255, 99, 132, 1)',  // Red border
+                    borderWidth: 2
+                }
+            ]
+        };
+
+        // Chart configuration with animation and effects
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                animation: {
+                    duration: 1500,  // Duration of the animation
+                    easing: 'easeInOutQuad'  // Smooth easing effect
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Arial, sans-serif',
+                                weight: 'bold'
+                            },
+                            color: '#333'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#333',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Value',
+                            color: '#333',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        ticks: {
+                            color: '#333',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Month',
+                            color: '#333',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        ticks: {
+                            color: '#333',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Render the chart
+        const ctx = document.getElementById('dataChart').getContext('2d');
+        new Chart(ctx, config);
+    </script>
+</body>
+</html>
