@@ -3,48 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yearly Data Chart</title>
+    <title>Yearly Data Chart and Table</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f7fc;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            text-align: center;
         }
         .container {
             width: 80%;
-            margin: 50px auto;
-            text-align: center;
+            margin: 20px auto;
         }
         h1 {
             color: #333;
             font-size: 2.5em;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-transform: uppercase;
         }
         canvas {
-            width: 100%;
-            height: 500px;
+            margin-bottom: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .description {
-            font-size: 1.2em;
-            color: #666;
-            margin-bottom: 30px;
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-size: 1em;
+            text-transform: uppercase;
+        }
+        td {
+            font-size: 1em;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Projek Data Chart</h1>
-        <p class="description"> Muhammad Akmal Khatami</p>
+        <h1>Yearly Data Chart and Table</h1>
         <canvas id="dataChart"></canvas>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tahun</th>
+                    <th>Januari</th>
+                    <th>Februari</th>
+                    <th>Maret</th>
+                    <th>April</th>
+                    <th>Mei</th>
+                    <th>Juni</th>
+                    <th>Juli</th>
+                    <th>Agustus</th>
+                    <th>September</th>
+                    <th>Oktober</th>
+                    <th>November</th>
+                    <th>Desember</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2022</td>
+                    <td>4017</td>
+                    <td>6135</td>
+                    <td>7092</td>
+                    <td>5841</td>
+                    <td>5036</td>
+                    <td>4547</td>
+                    <td>3467</td>
+                    <td>3970</td>
+                    <td>6313</td>
+                    <td>3595</td>
+                    <td>9207</td>
+                    <td>5945</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>2416</td>
+                    <td>4136</td>
+                    <td>7935</td>
+                    <td>8004</td>
+                    <td>9505</td>
+                    <td>5206</td>
+                    <td>6108</td>
+                    <td>6343</td>
+                    <td>9404</td>
+                    <td>9280</td>
+                    <td>9287</td>
+                    <td>8689</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <script>
-        // Data for the chart
         const data = {
             labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
             datasets: [
@@ -65,78 +135,24 @@
             ]
         };
 
-        // Chart configuration with animation and effects
         const config = {
             type: 'bar',
             data: data,
             options: {
                 responsive: true,
-                animation: {
-                    duration: 1500,  // Duration of the animation
-                    easing: 'easeInOutQuad'  // Smooth easing effect
-                },
                 plugins: {
                     legend: {
-                        position: 'top',
-                        labels: {
-                            font: {
-                                size: 14,
-                                family: 'Arial, sans-serif',
-                                weight: 'bold'
-                            },
-                            color: '#333'
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: '#333',
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`;
-                            }
-                        }
+                        position: 'top'
                     }
                 },
                 scales: {
                     y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Value',
-                            color: '#333',
-                            font: {
-                                size: 16
-                            }
-                        },
-                        ticks: {
-                            color: '#333',
-                            font: {
-                                size: 14
-                            }
-                        }
-                    },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Month',
-                            color: '#333',
-                            font: {
-                                size: 16
-                            }
-                        },
-                        ticks: {
-                            color: '#333',
-                            font: {
-                                size: 14
-                            }
-                        }
+                        beginAtZero: true
                     }
                 }
             }
         };
 
-        // Render the chart
         const ctx = document.getElementById('dataChart').getContext('2d');
         new Chart(ctx, config);
     </script>
